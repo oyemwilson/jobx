@@ -92,48 +92,54 @@ const JobGridItems = ({ filters }) => {
             </Col>
           </Row>
 
-          {/* Job Cards */}
-          <Row>
-            {currentJobs.map((job, index) => (
-              <Col lg={12} key={index} className="mb-3">
-                <Card className="p-3 shadow-sm">
-                  <Row className="align-items-center">
-                    <Col lg={1} md={2} sm={3} xs={3}>
-                      {/* <img
-                        src={job.logo}
-                        alt="Job Logo"
-                        className="img-fluid"
-                        style={{ maxWidth: "60px" }}
-                      /> */}
-                    </Col>
-                    <Col lg={5} md={6} sm={6} xs={6}>
-                      <h6 className="text-success">{job.type}</h6>
-                      <h5 className="mb-0 fw-bold">{job.title}</h5>
-                    </Col>
-                    <Col lg={4} md={2} sm={6} xs={6} className="text-muted">
-                      <p className="mb-1">{job.country}</p>
-                      <p className="mb-1">{job.state}</p>
-                      <small>
-                        {job.salary.min} - {job.salary.max} . {job.experience}
-                      </small>
-                    </Col>
-                    <Col lg={2} md={2} sm={4} xs={6} className="text-end float-end">
-                      <Link to={`/job-details/${job._id}`}>
-                        <Button
-                          link
-                          variant=""
-                          size="md rounded-pill px-4 text-end apply-btn"
-                        >
-                          Apply
-                        </Button>
-                      </Link>
-
-                    </Col>
-                  </Row>
-                </Card>
-              </Col>
-            ))}
+{/* Job Cards */}
+{loading ? (
+  <Spinner />
+) : error ? (
+  <p>{error.message}</p> // Ensure an error message is displayed
+) : (
+  <Row>
+    {currentJobs.map((job, index) => (
+      <Col lg={12} key={index} className="mb-3">
+        <Card className="p-3 shadow-sm">
+          <Row className="align-items-center">
+            <Col lg={1} md={2} sm={3} xs={3}>
+              {/* Uncomment if job logos are available */}
+              {/* <img
+                src={job.logo}
+                alt="Job Logo"
+                className="img-fluid"
+                style={{ maxWidth: "60px" }}
+              /> */}
+            </Col>
+            <Col lg={5} md={6} sm={6} xs={6}>
+              <h6 className="text-success">{job.type}</h6>
+              <h5 className="mb-0 fw-bold">{job.title}</h5>
+            </Col>
+            <Col lg={4} md={2} sm={6} xs={6} className="text-muted">
+              <p className="mb-1">{job.country}</p>
+              <p className="mb-1">{job.state}</p>
+              <small>
+                {job.salary.min} - {job.salary.max} . {job.experience}
+              </small>
+            </Col>
+            <Col lg={2} md={2} sm={4} xs={6} className="text-end float-end">
+              <Link to={`/job-details/${job._id}`}>
+                <Button
+                  variant=""
+                  size="md rounded-pill px-4 text-end apply-btn"
+                >
+                  Apply
+                </Button>
+              </Link>
+            </Col>
           </Row>
+        </Card>
+      </Col>
+    ))}
+  </Row>
+)}
+
 
           {/* Pagination */}
           <div className="mt-5">
