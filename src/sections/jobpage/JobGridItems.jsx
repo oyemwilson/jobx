@@ -14,25 +14,25 @@ const JobGridItems = ({ filters }) => {
   }, [dispatch]);
 
   // Show loading state before rendering
-  if (loading) {
-    return (
-      <Container className="py-5 text-center">
-        <Spinner animation="border" variant="primary" />
-        <p>Loading jobs...</p>
-      </Container>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <Container className="py-5 text-center">
+  //       <Spinner animation="border" variant="primary" />
+  //       <p>Loading jobs...</p>
+  //     </Container>
+  //   );
+  // }
 
-  // Handle error state
-  if (error) {
-    return (
-      <Container className="py-5 text-center text-danger">
-        <p>Error: {error}</p>
-      </Container>
-    );
-  }
+  // // Handle error state
+  // if (error) {
+  //   return (
+  //     <Container className="py-5 text-center text-danger">
+  //       <p>Error: {error}</p>
+  //     </Container>
+  //   );
+  // }
   // Apply filters to the jobs
-  const filteredJobs = jobs.filter((job) => {
+  const filteredJobs = Array.isArray(jobs) ? jobs.filter((job) => {
     // Safely access properties using optional chaining and provide default values
     const jobLocation = job.country?.toLowerCase() || "";
     const jobCategory = job.category?.toLowerCase() || "";
