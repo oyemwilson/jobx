@@ -1,0 +1,80 @@
+.job-banner{
+    background-color: #122620 !important;
+    color: white;
+    padding: 9rem 1rem;
+}
+.jobpage-top{
+    position: absolute;
+    top: 0vw;
+    right: 40vw;
+}
+.jobpage-left{
+    position: absolute;
+    top: 52%;
+    left: 0vw;
+}
+.jobpage-search-form{
+    width: 61% !important;
+  
+}
+.jobsearch-button{
+    width: 200%;
+    height: 100%;
+    background-color: rgb(11, 217, 148) !important;
+    color: black !important;
+    border-radius: 0px 10px 10px 0px !important;
+}
+.jobpage-input-form{
+    height: 250% !important; 
+}
+@media only screen and (max-width: 993px) {
+    .jobsearch-button {
+        width: 20vw;
+    }
+    .jobpage-input-form{
+        height: 100% !important; 
+    }
+
+    .jobpage-search-form {
+        width: 70vw !important;
+    }
+}
+
+@media only screen and (max-width: 793px) {
+    .jobpage-search-form {
+        width: 93% !important;
+    }
+}
+@media only screen and (max-width: 1500px) {
+    .jobpage-left{
+        position: absolute;
+        top: 58%;
+        left: 0vw;
+    }
+}
+    .filter-card{
+        background-color: #eff6f3;
+        padding: 2rem;
+        border-radius: 2rem;
+    
+    }
+    .filter-card button{
+        background-color: #244034  !important;
+        border: 0;
+        border-radius: 5px;
+        height: 3rem;
+    }
+    /* .filter-card input, select{
+        background-color: #eff6f3;
+
+    
+    } */
+
+.filter-button {
+    border: 2px solid #244034 !important;
+}
+
+.apply-btn{
+    background-color: #244034 !important;
+    color: white !important;
+}

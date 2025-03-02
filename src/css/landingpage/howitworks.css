@@ -1,0 +1,58 @@
+.how-to-section {
+    height: 60vh;
+    background-color: #122620;
+    color: white;
+}
+
+#how-to {
+    padding-top: 5% !important;
+}
+
+.lazy-image {
+
+    fill: rgb(11, 217, 148) !important;
+    /* Change the fill color */
+    stroke: rgb(11, 217, 148) !important;
+    /* Add a stroke color */
+    stroke-width: 3;
+    /* Adjust stroke width */
+    opacity: 0.8;
+    /* Make it semi-transparent */
+    color: rgb(11, 217, 148) !important;
+
+}
+
+#hiw-icon {
+
+    /* background-color: #122620 !important; */
+    background-color: rgb(11, 217, 148) !important;
+    width: 85px;
+    height: 85px;
+    border-radius: 50% !important;
+    fill: rgb(11, 217, 148) !important;
+    stroke: rgb(11, 217, 148) !important;
+    color: white;
+}
+
+#hiw-icon img {
+
+    fill: rgb(11, 217, 148) !important;
+    stroke: rgb(11, 217, 148) !important;
+
+}
+
+#hiw-icon p h2 {
+    color: white;
+}
+
+@media only screen and (max-width: 991px) {
+    .how-to-section {
+        height: 75vh;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .how-to-section {
+        height: 95vh;
+    }
+}

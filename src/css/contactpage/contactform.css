@@ -1,0 +1,29 @@
+.contact-form-group{
+
+    margin-top: 2rem;
+}
+.contact-form-control{
+    height: 4rem !important;
+    background-color: #f2f2f2 !important;
+    text-decoration: none;
+}
+.contact-textarea-control{
+    height: 9rem !important;
+    background-color: #f2f2f2 !important;
+}
+.map{
+    width: 100vw !important;
+    margin-bottom: 5rem;
+}
+.contact-svg{
+    background-color: rgba(127, 255, 212, 0.188);
+    width: 50px;
+    border-radius: 10px;
+}
+#contact-form{
+    margin-bottom: 10rem;
+}
+input:focus, textarea:focus, select:focus, button:focus {
+    outline: none; /* Removes the default outline */
+    border: none;  /* Removes the border */
+  }

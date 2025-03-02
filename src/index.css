@@ -1,13 +1,243 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html {
+    scroll-behavior: auto !important;
+  }
+  html, body {
+    overflow: auto !important;
+  }
+.back-to-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #122620;
+    color: white;
+    border: none;
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+    text-align: center;
+    transition: opacity 1s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+    /* Distant shadow */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.back-to-top:hover {
+    background-color: #0e1d1c;
+    /* Slightly darker on hover */
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+    /* More pronounced distant shadow on hover */
 }
+
+.back-to-top.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.back-to-top.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.navbar-offcanvas {
+    background-color: #132b24 !important;
+    color: white !important;
+}
+
+.btn-sml-1 {
+    border: 0px solid black !important;
+}
+
+.nav-link {
+    cursor: pointer;
+}
+
+.navlink-divider {
+    width: 100px;
+    /* Thickness of the divider */
+    height: 100px;
+    /* Height of the divider */
+    background-color: #122620;
+    /* Divider color */
+    margin: 0 10px;
+    /* Add space around the divider */
+    color: black;
+}
+
+  
+  .nav-link.active {
+    color: rgb(11, 217, 148) !important; /* Color when active */
+    font-weight: bold !important; /* Optional: make active link stand out */
+  }
+  
+  /* If using custom styles */
+  .nav-link {
+    transition: color 0.3s ease !important; /* Smooth color transition */
+  }
+  #small-screen-button2 {
+    background-color: rgb(11, 217, 148) !important;
+    border-radius: 15px;
+
+}
+.btn-sml-2 {
+    color: black !important;
+    border: 0px solid black !important;
+}
+
+
+
+/* .navbar .nav-link.active {
+    color: rgb(11, 217, 148) !important; 
+    font-weight: bold; 
+}
+
+.navbar .nav-link {
+    color: #ffffff;
+    transition: color 0.3s ease; 
+}
+
+.navbar .nav-link:hover {
+    color: rgb(200, 200, 200); 
+} */
+button.btn-close{
+    color: white !important;
+    
+}
+
+
+@media only screen and (max-width: 992px) {
+    #small-screen-button1 {
+        background-color: white !important;
+        border-radius: 15px;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        z-index: 1 !important;
+        display: block !important;
+    }
+
+    #small-screen-button2 {
+        background-color: rgb(11, 217, 148) !important;
+        border-radius: 15px;
+
+    }
+
+    .btn-sml-1 {
+        color: white !important;
+        color: black !important;
+    }
+
+    .btn-sml-2 {
+        color: black !important;
+        border: 0px solid black !important;
+    }
+
+    .nav-item {
+        margin-top: 1.5rem;
+    }
+
+    .border-start {
+        display: none;
+    }
+
+    #btn-hide {
+        display: none;
+
+    }
+}
+
+/* Overlay to cover the entire screen */
+.loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensure it's on top of everything else */
+  }
+  
+  .loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+  }
+  
+  /* Animation for spinning */
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+.active .page-link{
+    background: #244034  !important;
+    border-color: #122620 !important;
+    color: white !important;
+  }
+.page-link{
+    color: black !important;
+}
+.page-link.next{
+    color: #244034  !important;
+}
+.pagination{
+    border: 0px !important;
+}
+.form-control:focus {
+    box-shadow: none !important;
+    border: 1px solid #ced4da !important;
+    outline: none;
+}
+/* .dropdown-toggle:active,
+.dropdown-toggle:focus {
+    background-color: transparent !important;
+    border-color: #ced4da !important;
+} */
+ 
+@media (min-width: 992px) { /* lg breakpoint */
+    .fixed-aside {
+      position: fixed;
+      top: 30;
+      height: 100vh;
+      overflow-y: auto;
+    }
+  }
+  /* .dashboard-toggle{
+    background-color: #F0F5F3 !important;
+    ds
+  } */
+  .delete-modal {
+    z-index: 3050 !important;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* .delet-modal-backdrop {
+    display: none;
+}
+
+.modal-dialog {
+    z-index: 1051 !important;
+} */
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

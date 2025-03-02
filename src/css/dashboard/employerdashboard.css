@@ -1,0 +1,21 @@
+.dashboard{
+    background-color: #F0F5F3;
+    border-radius: 30px;
+    min-height: 100vh;
+}
+.dashboard-card{
+    width: 25% !important;
+    justify-content: space-around !important;
+    border-radius: 20px !important;
+}
+.dashcard-icon{
+    background-color: rgb(11, 217, 148);
+    border-radius: 50%;
+}
+@media only screen and (max-width: 798px) {
+    .dashboard-card{
+        width: 40% !important;
+        justify-content: space-around !important;
+        border-radius: 20px !important;
+    }
+}

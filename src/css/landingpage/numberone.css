@@ -1,0 +1,48 @@
+.numberone {
+    margin-top: 15rem;
+
+}
+
+.number-text {
+    color: #122620;
+
+}
+
+.number-button {
+
+    text-align: center;
+}
+
+.numberbutton1 {
+    border: 1px solid black;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 10px;
+    color: black;
+}
+
+.numberbutton2 {
+    border: 1px solid black;
+    padding: 1rem 2.5rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 10px;
+    color: black;
+    background-color: rgb(11, 217, 148);
+    ;
+}
+
+@media only screen and (max-width: 767px) {
+    .number-text {
+        text-align: center;
+    }
+
+    .numberone {
+        margin-top: 10rem;
+        background-color: rgba(0, 0, 0, 0.08);
+        ;
+    }
+}

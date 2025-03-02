@@ -1,0 +1,22 @@
+.asides-button{
+    /* color: black !important;
+    background-color: black !important;
+    width: 100% !important; */
+}
+.dashboard-active{
+    background: #244034  !important;
+    border-color: #122620 !important;
+    color: white !important;
+  }
+.navbar-nav li a span{
+    padding-left: 10px;
+  }
+  .asides-tabs{
+    margin-left: 3.5rem !important;
+    }
+
+  @media only screen and (max-width: 1500px) {
+    .asides-tabs{
+    margin-left: 2rem !important;
+    }
+  }
