@@ -26,13 +26,14 @@ const DashboardBody = () => {
     console.log(userJobs)
  
 
-    // if (loading) return <div>Loading...</div>;
-    // if (error) return <div>Error: {error}</div>;
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
 
-    // if (loading) return <div>Loading...</div>;
-    // if (error) return <div>Error: {error}</div>;
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
     return (
         <>
+        
             <div className="">
                 <div className="employer-dash-body m-5">
                     <div className="dashheader mb-5">
@@ -44,7 +45,7 @@ const DashboardBody = () => {
                                 <div className="d-flex row align-items-center justify-content-around text-center">
                                     <div className="col me-2">
                                         <div className="row">
-                                            <h1>{}</h1>
+                                            <h1>{userJobs.length}</h1>
                                             <p className='fw-lighter'>Posted Jobs</p>
                                         </div>
                                     </div>
