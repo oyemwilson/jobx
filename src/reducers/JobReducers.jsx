@@ -13,7 +13,7 @@ export const fetchJobsReducer = ( state = {}, action ) => {
         case FETCH_JOBLIST_REQUEST:
             return{...state, loading: true};
         case FETCH_JOBLIST_SUCCESS: 
-            return{...state, loading: false, jobs: action.payload}
+            return{...state, loading: false, jobs: action.payload, }
         case FETCH_JOBLIST_FAILURE:
             return{...state, loading:false, error: action.payload}
         case 'SET_CURRENT_PAGE':
