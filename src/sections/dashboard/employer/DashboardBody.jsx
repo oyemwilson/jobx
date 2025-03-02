@@ -45,7 +45,7 @@ const DashboardBody = () => {
                                 <div className="d-flex row align-items-center justify-content-around text-center">
                                     <div className="col me-2">
                                         <div className="row">
-                                            <h1>{userJobs.length}</h1>
+                                        <h1>{Array.isArray(userJobs) ? userJobs.length : 0}</h1>
                                             <p className='fw-lighter'>Posted Jobs</p>
                                         </div>
                                     </div>
