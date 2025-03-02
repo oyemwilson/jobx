@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Card, Button, Row, Col, Container } from "react-bootstrap";
+import { Card, Button, Row, Col, Container, Spinner } from "react-bootstrap";
 import { fetchJobs, setCurrentPage } from "../../actions/JobAction";
 import Pagination from "../../components/Pagination";
 import { Link } from "react-router-dom";
@@ -13,6 +13,24 @@ const JobGridItems = ({ filters }) => {
     dispatch(fetchJobs());
   }, [dispatch]);
 
+  // Show loading state before rendering
+  if (loading) {
+    return (
+      <Container className="py-5 text-center">
+        <Spinner animation="border" variant="primary" />
+        <p>Loading jobs...</p>
+      </Container>
+    );
+  }
+
+  // Handle error state
+  if (error) {
+    return (
+      <Container className="py-5 text-center text-danger">
+        <p>Error: {error}</p>
+      </Container>
+    );
+  }
   // Apply filters to the jobs
   const filteredJobs = jobs.filter((job) => {
     // Safely access properties using optional chaining and provide default values
