@@ -60,7 +60,7 @@ const JobGridItems = ({ filters }) => {
       return false;
     }
     return true;
-  });
+  }) : [];
   // Calculate the jobs to display for the current page
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
