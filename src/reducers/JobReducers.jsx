@@ -27,7 +27,10 @@ export const fetchJobsReducer = (state = {
     }
 }
 
-export const fetchUserJobsReducer = (state = {}, action) => {
+export const fetchUserJobsReducer = (state = {  userJobs: []
+    loading: false,
+    error: null,
+    selectedJob: null,}, action) => {
     switch (action.type) {
         case USER_JOB_POSTED_REQUEST:
             return { ...state, loading: true };
