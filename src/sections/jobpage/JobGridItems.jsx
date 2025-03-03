@@ -76,13 +76,17 @@ const JobGridItems = ({ filters }) => {
 
   return (
     <Container className="py-5">
-            {loading ? (
+           {loading ? (
         <div className="d-flex justify-content-center my-5">
           <Spinner animation="border" variant="primary" />
         </div>
       ) : error ? (
         <div className="text-center text-danger my-5">
           <p>Error: {error?.message || "Something went wrong!"}</p>
+        </div>
+      ) : filteredJobs.length === 0 ? (
+        <div className="text-center my-5">
+          <p>No jobs found.</p>
         </div>
       ) : (
       <Row>
@@ -156,7 +160,7 @@ const JobGridItems = ({ filters }) => {
           </div>
         </Col>
       </Row>
-            )}
+                  )}
     </Container>
   );
 };
