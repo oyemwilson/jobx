@@ -7,27 +7,14 @@ import { Link } from "react-router-dom";
 
 const JobGridItems = ({ filters }) => {
   const dispatch = useDispatch();
-
-  const { jobs = [], loading, error, currentPage, jobsPerPage } = useSelector((state) => state.jobs);
+  const { jobs, loading, error, currentPage, jobsPerPage } = useSelector((state) => state.jobs);
 
   useEffect(() => {
-    dispatch(fetchJobs())
-      .then(() => {
-        console.log("Jobs fetched:", jobs);
-      })
-      .catch((error) => {
-        console.error("Error fetching jobs:", error);
-      });
+    dispatch(fetchJobs());
   }, [dispatch]);
-  useEffect(() => {
-    if (filteredJobs.length > 0 && indexOfFirstJob >= filteredJobs.length) {
-      dispatch(setCurrentPage(1));
-    }
-  }, [filteredJobs, dispatch, indexOfFirstJob]);
-  
 
   // Apply filters to the jobs
-  const filteredJobs = loading ? [] : jobs.filter((job) => {
+  const filteredJobs = jobs.filter((job) => {
     // Safely access properties using optional chaining and provide default values
     const jobLocation = job.country?.toLowerCase() || "";
     const jobCategory = job.category?.toLowerCase() || "";
@@ -65,28 +52,18 @@ const JobGridItems = ({ filters }) => {
   const handlePageChange = (page) => {
     dispatch(setCurrentPage(page));
   };
-  useEffect(() => {
-    if (filteredJobs.length > 0 && indexOfFirstJob >= filteredJobs.length) {
-      dispatch(setCurrentPage(1)); // Reset to first page if out of range
-    }
-  }, [filteredJobs, dispatch, indexOfFirstJob]);
-  
 
 
 
   return (
     <Container className="py-5">
-           {loading ? (
+            {loading ? (
         <div className="d-flex justify-content-center my-5">
           <Spinner animation="border" variant="primary" />
         </div>
       ) : error ? (
         <div className="text-center text-danger my-5">
           <p>Error: {error?.message || "Something went wrong!"}</p>
-        </div>
-      ) : filteredJobs.length === 0 ? (
-        <div className="text-center my-5">
-          <p>No jobs found.</p>
         </div>
       ) : (
       <Row>
@@ -160,7 +137,7 @@ const JobGridItems = ({ filters }) => {
           </div>
         </Col>
       </Row>
-                  )}
+            )}
     </Container>
   );
 };
