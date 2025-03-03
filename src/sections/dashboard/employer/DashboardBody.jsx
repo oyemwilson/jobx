@@ -16,14 +16,14 @@ const DashboardBody = () => {
       useEffect(() => {
         dispatch(fetchJobs());
       }, [dispatch]);
-    // console.log("Token from Redux:", token);
-    useEffect(() => {
+    
+      // Fetch user jobs only if token is available
+      useEffect(() => {
         if (token) {
-            dispatch(fetchUserJobs(token)); // Pass token when dispatching the action
+          dispatch(fetchUserJobs(token));
         }
-
-    }, [dispatch, token]); // Include token in dependencies
-    console.log(userJobs)
+      }, [dispatch, token]);
+    
  
     if (loading) {
         return <p>Loading ...</p>;
@@ -46,7 +46,7 @@ const DashboardBody = () => {
                                 <div className="d-flex row align-items-center justify-content-around text-center">
                                     <div className="col me-2">
                                         <div className="row">
-                                            <h1>{userJobs.length}</h1>
+                                        <h1>{userJobs ? userJobs.length : 0}</h1>
                                             <p className='fw-lighter'>Posted Jobs</p>
                                         </div>
                                     </div>
