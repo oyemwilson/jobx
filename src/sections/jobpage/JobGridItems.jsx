@@ -85,7 +85,7 @@ const JobGridItems = ({ filters }) => {
 
           {/* Job Cards */}
           <Row>
-            {filteredJobs.map((job, index) => (
+            {currentJobs.map((job, index) => (
               <Col lg={12} key={index} className="mb-3">
                 <Card className="p-3 shadow-sm">
                   <Row className="align-items-center">
