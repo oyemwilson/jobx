@@ -8,7 +8,7 @@ const ApplicantScreen = () => {
         <div>
          <div className="">
         <div className="row">
-          <div className="col-xl-2 col-lg-3 col-md-0 col-sm-0 mb-3 mt-5">
+          <div className="col-xl-2 col-lg-3 col-md-0 col-sm-0 pb-3 pt-5 dashboard-side-panel">
           <div className="fixed-aside">
               <AdminAsides />
             </div>
