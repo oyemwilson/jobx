@@ -11,13 +11,9 @@ const JobGridItems = ({ filters }) => {
   const currentPage = useSelector((state) => state.jobs.currentPage) || 1;
 const jobsPerPage = useSelector((state) => state.jobs.jobsPerPage) || 8;
 
-useEffect(() => {
-  const fetchData = async () => {
-    await dispatch(fetchJobs()); // Wait for jobs to be fetched
-    dispatch(setCurrentPage(1)); // Set the initial page after fetching
-  };
-  fetchData();
-}, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchJobs());
+  }, [dispatch]);
 
   // Apply filters to the jobs
   const filteredJobs = jobs?.filter((job) => {
