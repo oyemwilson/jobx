@@ -1,4 +1,4 @@
-import { FETCH_JOBLIST_REQUEST, FETCH_JOBLIST_SUCCESS, FETCH_JOBLIST_FAILURE, USER_JOB_POSTED_REQUEST, USER_JOB_POSTED_SUCCESS, USER_JOB_POSTED_FAILURE,  } from "../constants/JobConstants";
+import { FETCH_JOBLIST_REQUEST, FETCH_JOBLIST_SUCCESS, FETCH_JOBLIST_FAILURE, USER_JOB_POSTED_REQUEST, USER_JOB_POSTED_SUCCESS, USER_JOB_POSTED_FAILURE, } from "../constants/JobConstants";
 
 // const initialState = {
 //     jobs: [],
@@ -8,14 +8,19 @@ import { FETCH_JOBLIST_REQUEST, FETCH_JOBLIST_SUCCESS, FETCH_JOBLIST_FAILURE, US
 //     jobsPerPage: 8
 // }
 
-export const fetchJobsReducer = ( state = {jobs: []}, action ) => {
-    switch(action.type){
+export const fetchJobsReducer = (state = {
+    jobs: [], loading: false,
+    error: null,
+    currentPage: 1,
+    jobsPerPage: 9
+}, action) => {
+    switch (action.type) {
         case FETCH_JOBLIST_REQUEST:
-            return{...state, loading: true};
-        case FETCH_JOBLIST_SUCCESS: 
-            return{...state, loading: false, jobs: action.payload, }
+            return { ...state, loading: true };
+        case FETCH_JOBLIST_SUCCESS:
+            return { ...state, loading: false, jobs: action.payload, }
         case FETCH_JOBLIST_FAILURE:
-            return{...state, loading:false, error: action.payload}
+            return { ...state, loading: false, error: action.payload }
         case 'SET_CURRENT_PAGE':
             return { ...state, currentPage: action.payload };
         default: return state
@@ -30,10 +35,10 @@ export const fetchUserJobsReducer = (state = {}, action) => {
             return { ...state, loading: false, userJobs: action.payload };
         case USER_JOB_POSTED_FAILURE:
             return { ...state, loading: false, error: action.payload };
-            case "SET_SELECTED_JOB":
+        case "SET_SELECTED_JOB":
             return { ...state, selectedJob: action.payload };
         default:
-            return state; 
+            return state;
     }
 };
 
