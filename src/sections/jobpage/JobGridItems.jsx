@@ -52,6 +52,14 @@ const JobGridItems = ({ filters }) => {
   const handlePageChange = (page) => {
     dispatch(setCurrentPage(page));
   };
+  console.log("Pagination debug:", {
+    currentPage,
+    jobsPerPage,
+    filteredJobsLength: filteredJobs.length,
+    currentJobsLength: currentJobs.length,
+    indexOfFirstJob,
+    indexOfLastJob
+  });
 
 
 
