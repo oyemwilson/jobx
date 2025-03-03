@@ -12,7 +12,7 @@ export const fetchJobsReducer = (state = {
     jobs: [], loading: false,
     error: null,
     currentPage: 1,
-    jobsPerPage: 9
+    jobsPerPage: 8
 }, action) => {
     switch (action.type) {
         case FETCH_JOBLIST_REQUEST:
