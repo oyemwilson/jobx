@@ -10,9 +10,13 @@ const JobGridItems = ({ filters }) => {
   const { jobs, loading, error, currentPage, jobsPerPage } = useSelector((state) => state.jobs);
 
   useEffect(() => {
-    dispatch(fetchJobs()).then(() => {
-      console.log("Jobs fetched:", jobs);
-    });
+    dispatch(fetchJobs())
+      .then(() => {
+        console.log("Jobs fetched:", jobs);
+      })
+      .catch((error) => {
+        console.error("Error fetching jobs:", error);
+      });
   }, [dispatch]);
 
   
