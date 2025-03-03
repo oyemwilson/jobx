@@ -7,8 +7,9 @@ import { Link } from "react-router-dom";
 
 const JobGridItems = ({ filters }) => {
   const dispatch = useDispatch();
-  const { jobs, loading, error, currentPage, jobsPerPage } = useSelector((state) => state.jobs);
-  console.log(currentPage)
+  const { jobs, loading, error,  } = useSelector((state) => state.jobs);
+  const currentPage = useSelector((state) => state.jobs.currentPage) || 1;
+const jobsPerPage = useSelector((state) => state.jobs.jobsPerPage) || 10;
 
   useEffect(() => {
     dispatch(fetchJobs());
