@@ -15,17 +15,7 @@ const JobGridItems = ({ filters }) => {
     });
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log("Current Page:", currentPage);
-  }, [currentPage]);
   
-  useEffect(() => {
-    console.log("Jobs:", jobs);
-  }, [jobs]);
-  
-  useEffect(() => {
-    console.log("Filtered Jobs:", filteredJobs);
-  }, [filteredJobs]);
 
   // Apply filters to the jobs
   const filteredJobs = jobs.filter((job) => {
