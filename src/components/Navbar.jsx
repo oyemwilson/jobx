@@ -103,7 +103,7 @@ const Navbar = () => {
                                                 }
                                             }
                                         }}
-                                    >Home</NavLink>
+                                    >Homee</NavLink>
                                 </li>
                                 <li className="nav-item">
                                     <NavLink className={({ isActive }) =>

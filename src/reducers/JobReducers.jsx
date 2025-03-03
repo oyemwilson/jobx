@@ -8,7 +8,7 @@ import { FETCH_JOBLIST_REQUEST, FETCH_JOBLIST_SUCCESS, FETCH_JOBLIST_FAILURE, US
 //     jobsPerPage: 8
 // }
 
-export const fetchJobsReducer = ( state = {}, action ) => {
+export const fetchJobsReducer = ( state = {jobs: []}, action ) => {
     switch(action.type){
         case FETCH_JOBLIST_REQUEST:
             return{...state, loading: true};

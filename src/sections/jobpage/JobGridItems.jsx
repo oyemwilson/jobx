@@ -7,7 +7,8 @@ import { Link } from "react-router-dom";
 
 const JobGridItems = ({ filters }) => {
   const dispatch = useDispatch();
-  const { jobs, loading, error, currentPage, jobsPerPage } = useSelector((state) => state.jobs);
+
+  const { jobs = [], loading, error, currentPage, jobsPerPage } = useSelector((state) => state.jobs);
 
   useEffect(() => {
     dispatch(fetchJobs())
@@ -18,11 +19,15 @@ const JobGridItems = ({ filters }) => {
         console.error("Error fetching jobs:", error);
       });
   }, [dispatch]);
-
+  useEffect(() => {
+    if (filteredJobs.length > 0 && indexOfFirstJob >= filteredJobs.length) {
+      dispatch(setCurrentPage(1));
+    }
+  }, [filteredJobs, dispatch, indexOfFirstJob]);
   
 
   // Apply filters to the jobs
-  const filteredJobs = jobs.filter((job) => {
+  const filteredJobs = loading ? [] : jobs.filter((job) => {
     // Safely access properties using optional chaining and provide default values
     const jobLocation = job.country?.toLowerCase() || "";
     const jobCategory = job.category?.toLowerCase() || "";
