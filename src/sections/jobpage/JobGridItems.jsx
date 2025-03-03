@@ -9,7 +9,7 @@ const JobGridItems = ({ filters }) => {
   const dispatch = useDispatch();
   const { jobs, loading, error,  } = useSelector((state) => state.jobs);
   const currentPage = useSelector((state) => state.jobs.currentPage) || 1;
-const jobsPerPage = useSelector((state) => state.jobs.jobsPerPage) || 8;
+const jobsPerPage = useSelector((state) => state.jobs.jobsPerPage) || 10;
 
   useEffect(() => {
     dispatch(fetchJobs());
@@ -62,13 +62,7 @@ const jobsPerPage = useSelector((state) => state.jobs.jobsPerPage) || 8;
     indexOfFirstJob,
     indexOfLastJob
   });
-  if (loading) {
-    return (
-      <div className="d-flex justify-content-center my-5">
-        <Spinner animation="border" variant="primary" />
-      </div>
-    );
-  }
+
 
 
   return (
