@@ -52,6 +52,12 @@ const JobGridItems = ({ filters }) => {
   const handlePageChange = (page) => {
     dispatch(setCurrentPage(page));
   };
+  useEffect(() => {
+    if (filteredJobs.length > 0 && indexOfFirstJob >= filteredJobs.length) {
+      dispatch(setCurrentPage(1)); // Reset to first page if out of range
+    }
+  }, [filteredJobs, dispatch, indexOfFirstJob]);
+  
 
 
 
