@@ -61,7 +61,7 @@ const DashboardBody = () => {
     <p className="fs-3 ps-4 pt-3 mb-0">Job Posted</p>
     <hr />
     <div className="px-5 py-2 d-flex flex-column">
-        {userJobs.map((job) => (
+    {userJobs && userJobs.map((job) => (
             <div key={job._id} className="col mb-3">
                 <div className="row d-flex justify-content-between align-items-center">
                     {/* Left Side - Job Details */}
