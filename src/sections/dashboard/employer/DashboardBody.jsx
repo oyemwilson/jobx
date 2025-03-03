@@ -8,7 +8,7 @@ import { setSelectedJob } from '../../../actions/JobAction'
 const DashboardBody = () => { 
     const dispatch = useDispatch()
 
-    const {userJobs, loading,selectedJob , error} = useSelector((state) => state.userJobs)
+    const {userJobs, loading, selectedJob , error} = useSelector((state) => state.userJobs)
     const token = useSelector ((state) => state.user.user.token)
       const { jobs,} = useSelector((state) => state.jobs);
 

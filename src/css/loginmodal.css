@@ -43,6 +43,8 @@
 }
 .signup-btn{
     color: rgb(11, 217, 148);
+    background-color: white !important;
+    border: 0 !important;
 }
 .login-input{
     background: rgba(49, 121, 90, .09) !important;

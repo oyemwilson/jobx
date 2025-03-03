@@ -26,23 +26,7 @@ export const setCurrentPage = (page) => ({
     payload: page
 })
 
-// export const jobDetails = () => async (dispatch) =>{
-//     try{
-//         dispatch({type: JOB_DETAILS_REQUEST})
 
-//         const {data} = await axios.get(`${API_BASE_URL}/:id`)
-//         dispatch({
-//             type: JOB_DETAILS_SUCCESS,
-//             payload: data
-//         })
-//     }
-//     catch (error){
-//         dispatch ({
-//             type: JOB_DETAILS_FAILURE,
-//             payload: error.response?.data?.message || error.message,
-//         })
-//     }
-// }
 export const fetchUserJobs = (token) => async (dispatch) => {
     try {
         dispatch({ type: USER_JOB_POSTED_REQUEST });

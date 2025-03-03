@@ -2,7 +2,7 @@ import { React, useState, useEffect } from 'react';
 import { useSelector, useDispatch, } from 'react-redux';
 import style from '../../css/loginmodal.css'
 import { login, logout } from '../../actions/UserActions';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link  } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import { useRef } from 'react';
 
@@ -96,6 +96,9 @@ const LoginModal = () => {
   const handleLogout = () => {
     dispatch(logout());
   };
+  const handleSignUpClick = () => {
+    navigate('/register');
+  };
 
 
   return (
@@ -181,7 +184,20 @@ const LoginModal = () => {
                   </div>
                 </div> */}
                 <div className='text-center'>
-                  <p className='fs-5 fw-lighter'>dont have an account <a href="/register" className='fw-normal text-decoration-none signup-btn'>sign up</a></p>
+                  <p>    already have an account? <span> <Link to="/register" className="fw-normal text-decoration-none signup-btn" onClick={(e) => {
+                                            // Use data attribute to close offcanvas
+        const modalshow = document.getElementById('loginModal');
+        if (modalshow) {
+          const closeButton = modalshow.querySelector('[data-bs-dismiss="modal"]');
+          if (closeButton) {
+            closeButton.click();
+          }
+        }
+      
+                                        }}>
+ <span>Sign Up</span>
+  </Link></span></p>
+                
                 </div>
               </form>
             </div>
