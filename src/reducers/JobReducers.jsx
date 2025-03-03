@@ -27,7 +27,7 @@ export const fetchJobsReducer = (state = {
     }
 }
 
-export const fetchUserJobsReducer = (state = {  userJobs: []
+export const fetchUserJobsReducer = (state = {  userJobs: [],
     loading: false,
     error: null,
     selectedJob: null,}, action) => {
