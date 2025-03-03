@@ -203,7 +203,12 @@ button.btn-close{
     background-color: transparent !important;
     border-color: #ced4da !important;
 } */
- 
+.fixed-aside {
+    position: absolute;
+    top: 30;
+    height: 100vh;
+    overflow-y: auto;
+  }
 @media (min-width: 992px) { /* lg breakpoint */
     .fixed-aside {
       position: fixed;
@@ -241,3 +246,8 @@ button.btn-close{
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+  .offcavas-body {
+    overflow-y: auto;
+    max-height: calc(100vh - 50px); /* Adjust height to fit screen */
+    padding-bottom: 20px; /* To prevent items from being hidden at the bottom */
+}

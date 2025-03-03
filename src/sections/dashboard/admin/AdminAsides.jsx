@@ -109,10 +109,13 @@ const AdminAsides = () => {
                                         <i className="fa-solid fa-gear pe-4" style={{ color: '#000000' }}></i>Account Settings
                                     </NavLink>
                                 </li>
+                                <li className="nav-item  mb-4">
+    <a className="nav-link fs-5" href="#" onClick={handleLogout}>
+        <i className="fa-solid fa-arrow-right-from-bracket pe-4" style={{ color: "#000000" }}></i>Logout
+    </a>
+</li>
                             </ul>
-                            <div className="asides-buttom ms-5 fixed-bottom mb-4">
-                                <a class="nav-link fs-5" aria-current="page" onClick={handleLogout} href="#"><i class="fa-solid fa-arrow-right-from-bracket pe-4" style={{ color: "#000000" }}></i>Logout</a>
-                            </div>
+
                         </div>
                     </div>
                 </div>

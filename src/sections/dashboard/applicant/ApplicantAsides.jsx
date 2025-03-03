@@ -99,6 +99,7 @@ const ApplicantAsides = () => {
                                             <i className="fa-solid fa-pen pe-4 fs-5" style={{ color: '#000000' }}></i>Saved Jobs
                                         </NavLink>
                                     </li>
+                                    
                                     <li className="nav-item mb-4">
                                         <NavLink
                                             to="/applicant-account-settings"
@@ -134,9 +135,11 @@ const ApplicantAsides = () => {
                                             <i className="fa-solid fa-trash pe-4" style={{ color: '#000000' }}></i>Delete Account
                                         </a>
                                     </li>
-                                    <li className="asi mt-5 mb-4">
-                                    <a class="nav-link fs-5 " aria-current="page" href="#" onClick={handleLogout}><i class="fa-solid fa-arrow-right-from-bracket pe-4" style={{ color: "#000000" }}></i>Logout</a>
-                                    </li>
+                                    <li className="nav-item  mb-4">
+    <a className="nav-link fs-5" href="#" onClick={handleLogout}>
+        <i className="fa-solid fa-arrow-right-from-bracket pe-4" style={{ color: "#000000" }}></i>Logout
+    </a>
+</li>
                                 </ul>
                                 <div  >
                                     
