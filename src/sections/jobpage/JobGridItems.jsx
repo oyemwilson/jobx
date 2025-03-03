@@ -7,11 +7,17 @@ import { Link } from "react-router-dom";
 
 const JobGridItems = ({ filters }) => {
   const dispatch = useDispatch();
-  const { jobs, loading, error, currentPage, jobsPerPage } = useSelector((state) => state.jobs);
+  const { jobs, loading, error,  } = useSelector((state) => state.jobs);
+  const currentPage = useSelector((state) => state.jobs.currentPage) || 1;
+const jobsPerPage = useSelector((state) => state.jobs.jobsPerPage) || 8;
 
-  useEffect(() => {
-    dispatch(fetchJobs());
-  }, [dispatch]);
+useEffect(() => {
+  const fetchData = async () => {
+    await dispatch(fetchJobs()); // Wait for jobs to be fetched
+    dispatch(setCurrentPage(1)); // Set the initial page after fetching
+  };
+  fetchData();
+}, [dispatch]);
 
   // Apply filters to the jobs
   const filteredJobs = jobs?.filter((job) => {
@@ -60,7 +66,13 @@ const JobGridItems = ({ filters }) => {
     indexOfFirstJob,
     indexOfLastJob
   });
-
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center my-5">
+        <Spinner animation="border" variant="primary" />
+      </div>
+    );
+  }
 
 
   return (
