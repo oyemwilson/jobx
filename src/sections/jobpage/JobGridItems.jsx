@@ -14,7 +14,7 @@ const JobGridItems = ({ filters }) => {
   }, [dispatch]);
 
   // Apply filters to the jobs
-  const filteredJobs = jobs.filter((job) => {
+  const filteredJobs = jobs?.filter((job) => {
     // Safely access properties using optional chaining and provide default values
     const jobLocation = job.country?.toLowerCase() || "";
     const jobCategory = job.category?.toLowerCase() || "";
@@ -42,7 +42,7 @@ const JobGridItems = ({ filters }) => {
       return false;
     }
     return true;
-  });
+  }) || [];
   // Calculate the jobs to display for the current page
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
@@ -60,10 +60,6 @@ const JobGridItems = ({ filters }) => {
             {loading ? (
         <div className="d-flex justify-content-center my-5">
           <Spinner animation="border" variant="primary" />
-        </div>
-      ) : error ? (
-        <div className="text-center text-danger my-5">
-          <p>Error: {error?.message || "Something went wrong!"}</p>
         </div>
       ) : (
       <Row>
