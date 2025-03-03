@@ -135,8 +135,8 @@ const ApplicantAsides = () => {
                                             <i className="fa-solid fa-trash pe-4" style={{ color: '#000000' }}></i>Delete Account
                                         </a>
                                     </li>
-                                    <li className="nav-item  mb-4">
-    <a className="nav-link fs-5" href="#" onClick={handleLogout}>
+                                    <li className="nav-item  mb-5">
+    <a className="nav-link fs-5 mb-5" href="#" onClick={handleLogout}>
         <i className="fa-solid fa-arrow-right-from-bracket pe-4" style={{ color: "#000000" }}></i>Logout
     </a>
 </li>
