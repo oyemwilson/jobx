@@ -1,112 +1,119 @@
 import { React, useState, useEffect } from 'react';
-import { useSelector, useDispatch, } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import style from '../../css/loginmodal.css'
 import { login, logout } from '../../actions/UserActions';
-import { useNavigate, Link  } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import { useRef } from 'react';
 
 const LoginModal = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [shouldRedirect, setShouldRedirect] = useState(true);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
   const dispatch = useDispatch();
   const { isAuthenticated, user, loading, error } = useSelector((state) => state.user);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const closeModal = () => {
+    const modalshow = document.getElementById('loginModal');
+    if (modalshow) {
+      const closeButton = modalshow.querySelector('[data-bs-dismiss="modal"]');
+      if (closeButton) {
+        closeButton.click();
+      }
+    }
+  };
+
+  const navigateBasedOnRole = (userRole) => {
+    switch (userRole) {
+      case 'applicant':
+        navigate('/applicant-dashboard');
+        break;
+      case 'employer':
+        navigate('/employer-dashboard');
+        break;
+      case 'admin':
+        navigate('/admin-dashboard');
+        break;
+      default:
+        console.warn('Unknown user role:', userRole);
+    }
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
     
+    if (isLoggingIn) return; // Prevent double submission
+    
+    setIsLoggingIn(true);
+    
     try {
-      // Store current auth state before login attempt
-      const wasAuthenticated = isAuthenticated;
-      
-      // Dispatch login action and capture result
       const actionResult = await dispatch(login({ email, password }));
       
-      // First check - if not previously authenticated and action succeeded
-      const loginSucceeded = actionResult?.payload?.user || actionResult?.payload?.success;
+      console.log('Login action result:', actionResult); // Debug log
       
-      if (loginSucceeded || (!wasAuthenticated && isAuthenticated)) {
-        // Get user info either from result or from state
-        const currentUser = actionResult?.payload?.user || user;
+      // Check different possible success indicators
+      const isSuccess = 
+        actionResult?.type?.endsWith('/fulfilled') || 
+        actionResult?.payload?.success === true ||
+        actionResult?.payload?.user ||
+        actionResult?.meta?.requestStatus === 'fulfilled';
+      
+      if (isSuccess) {
+        const loggedInUser = actionResult.payload?.user;
         
-        // Redirect based on role information we have
-        if (currentUser?.role) {
-          if (currentUser.role === 'applicant') {
-            navigate('/applicant-dashboard');
-          } else if (currentUser.role === 'employer') {
-            navigate('/employer-dashboard');
-          } else if (currentUser.role === 'admin') {
-            navigate('/admin-dashboard');
-          }
+        if (loggedInUser?.role) {
+          console.log('Navigating based on role:', loggedInUser.role); // Debug log
+          navigateBasedOnRole(loggedInUser.role);
+          closeModal();
         } else {
-          // Fallback if we can't determine role yet - use a timeout
+          // Wait a bit for Redux state to update, then check again
           setTimeout(() => {
+            const currentState = document.querySelector('[data-user-state]')?.dataset.userState;
             if (isAuthenticated && user?.role) {
-              if (user.role === 'applicant') {
-                navigate('/applicant-dashboard');
-              } else if (user.role === 'employer') {
-                navigate('/employer-dashboard');
-              } else if (user.role === 'admin') {
-                navigate('/admin-dashboard');
-              }
+              console.log('Delayed navigation for role:', user.role); // Debug log
+              navigateBasedOnRole(user.role);
+              closeModal();
             }
-            
-            // Close modal regardless
-            const modalshow = document.getElementById('loginModal');
-            if (modalshow) {
-              const closeButton = modalshow.querySelector('[data-bs-dismiss="modal"]');
-              if (closeButton) {
-                closeButton.click();
-              }
-            }
-          }, 500);
+          }, 100);
         }
-      } else if (isAuthenticated && user) {
-        // Handle case where user is already authenticated
-        if (user.role === 'applicant') {
-          navigate('/applicant-dashboard');
-        } else if (user.role === 'employer') {
-          navigate('/employer-dashboard');
-        } else if (user.role === 'admin') {
-          navigate('/admin-dashboard');
-        }
-        
-        // Close modal
-        const modalshow = document.getElementById('loginModal');
-        if (modalshow) {
-          const closeButton = modalshow.querySelector('[data-bs-dismiss="modal"]');
-          if (closeButton) {
-            closeButton.click();
-          }
-        }
+      } else if (actionResult?.type?.endsWith('/rejected')) {
+        // Handle login failure
+        console.error('Login failed:', actionResult.payload || actionResult.error);
       }
     } catch (error) {
       console.error('Login failed:', error);
+    } finally {
+      setIsLoggingIn(false);
     }
   };
 
-  const hasNavigated = useRef(false);
-
-  // useEffect(() => {
-  //   // Only run navigation if redirects are needed
+  // Handle navigation when Redux state updates (fallback)
+  useEffect(() => {
+    console.log('useEffect triggered:', { isAuthenticated, userRole: user?.role, isLoggingIn }); // Debug log
     
-  // }, [isAuthenticated, user, navigate, shouldRedirect]);
+    if (isAuthenticated && user?.role && isLoggingIn) {
+      console.log('useEffect navigation for role:', user.role); // Debug log
+      navigateBasedOnRole(user.role);
+      closeModal();
+      setIsLoggingIn(false);
+    }
+  }, [isAuthenticated, user?.role, isLoggingIn]);
+
   const handleLogout = () => {
     dispatch(logout());
   };
+
   const handleSignUpClick = () => {
+    closeModal();
     navigate('/register');
   };
 
-
   return (
-    <div className="modal fade" id="loginModal" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div className="modal fade" id="loginModal" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content loginmodal-content">
           <div className="modal-header">
-            {/* <h1 className="modal-title fs-5" id="staticBackdropLabel">Modal title</h1> */}
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div className="modal-body">
@@ -116,8 +123,8 @@ const LoginModal = () => {
                 <p className='fw-lighter'>Still do not have an account? <a href="/register" className='fw-normal text-decoration-none signup-btn'>Sign up</a> </p>
               </div>
               <form className='container' onSubmit={handleLogin}>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Email*</label>
+                <div className="form-group">
+                  <label htmlFor="exampleInputEmail1">Email*</label>
                   <input
                     type="email"
                     className="form-control login-input"
@@ -126,11 +133,12 @@ const LoginModal = () => {
                     placeholder="Jane@example.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    required
                   />
-                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                  <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
-                <div class="form-group pt-4">
-                  <label for="exampleInputPassword1">Password*</label>
+                <div className="form-group pt-4">
+                  <label htmlFor="exampleInputPassword1">Password*</label>
                   <input
                     type="password"
                     className="form-control login-input"
@@ -138,12 +146,13 @@ const LoginModal = () => {
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    required
                   />
                 </div>
                 <div className="d-flex align-items-center justify-content-between">
-                  <div class="form-group form-check my-3 col-lg-6 col-md-6 col-sm-6">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                    <label class="form-check-label" for="exampleCheck1">Keep me signed in</label>
+                  <div className="form-group form-check my-3 col-lg-6 col-md-6 col-sm-6">
+                    <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+                    <label className="form-check-label" htmlFor="exampleCheck1">Keep me signed in</label>
                   </div>
                   <div className='col-lg-6 col-md-6 col-sm-6'>
                     <a href="" className='text-decoration-none'>
@@ -151,61 +160,48 @@ const LoginModal = () => {
                     </a>
                   </div>
                 </div>
-                {
-                  loading && (
-                    <div className="text-center">
-                      <div className="spinner-border text-success" role="status">
-                        <span className="visually-hidden">Loading...</span>
-                      </div>
-                    </div>
-                  )
-                }
-                <button type="submit" class="btn text-light w-100 login-submit">Submit</button>
-                <div class="d-flex align-items-center mt-4 mb-3 ">
-                  <div class="line"></div><span class="pe-3 ps-3">OR</span><div class="line"></div>
-                </div>
-                {/* <div className="d-flex row text-center justify-content-between">
-                  <div className=" col-sm-12 col-md-5 col-lg-6 card social-login p-4 d-flex align-items-center justify-content-center mb-3">
-                    <a href="#" className="text-dark text-decoration-none d-flex align-items-center">
-                      <p className="mb-0 d-flex align-items-center">
-                        <i className="fa-brands fa-google me-2" style={{ color: '#122620' }}></i>
-                        Login with Google
-                      </p>
-                    </a>
-                  </div>
-
-                  <div className=" col-sm-12 col-md-5 col-lg-6 card social-login p-4 d-flex align-items-center justify-content-center mb-3">
-                    <a href="#" className="text-dark text-decoration-none d-flex align-items-center">
-                      <p className="mb-0 d-flex align-items-center">
-                        <i className="fa-brands fa-facebook me-2" style={{ color: '#122620' }}></i>
-                        Login with Facebook
-                      </p>
-                    </a>
-                  </div>
-                </div> */}
-                <div className='text-center'>
-                  <p>    already have an account? <span> <Link to="/register" className="fw-normal text-decoration-none signup-btn" onClick={(e) => {
-                                            // Use data attribute to close offcanvas
-        const modalshow = document.getElementById('loginModal');
-        if (modalshow) {
-          const closeButton = modalshow.querySelector('[data-bs-dismiss="modal"]');
-          if (closeButton) {
-            closeButton.click();
-          }
-        }
-      
-                                        }}>
- <span>Sign Up</span>
-  </Link></span></p>
                 
+                {error && (
+                  <div className="alert alert-danger" role="alert">
+                    {error}
+                  </div>
+                )}
+                
+                {(loading || isLoggingIn) && (
+                  <div className="text-center">
+                    <div className="spinner-border text-success" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                )}
+                
+                <button 
+                  type="submit" 
+                  className="btn text-light w-100 login-submit" 
+                  disabled={loading || isLoggingIn}
+                >
+                  {isLoggingIn ? 'Signing In...' : 'Submit'}
+                </button>
+                
+                <div className="d-flex align-items-center mt-4 mb-3">
+                  <div className="line"></div><span className="pe-3 ps-3">OR</span><div className="line"></div>
+                </div>
+                
+                <div className='text-center'>
+                  <p>Don't have an account? <span> 
+                    <Link 
+                      to="/register" 
+                      className="fw-normal text-decoration-none signup-btn" 
+                      onClick={handleSignUpClick}
+                    >
+                      <span>Sign Up</span>
+                    </Link>
+                    </span>
+                  </p>
                 </div>
               </form>
             </div>
           </div>
-          {/* <div className="modal-footer">
-            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" className="btn btn-primary">Understood</button>
-          </div> */}
         </div>
       </div>
     </div>
