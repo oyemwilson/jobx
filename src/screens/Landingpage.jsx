@@ -14,15 +14,15 @@ import Numberone from '../sections/homepage/Numberone';
 import Footer from '../components/Footer';
 import { API_BASE_URL } from '../config/api';
 
-// Simple spinner CSS
+// Full-screen spinner CSS with greenish background
 const spinnerStyles = `
   .spinner-container {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.8);
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 128, 0, 0.8);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,19 +88,25 @@ const Landingpage = () => {
 
     checkHeroImagesLoaded();
 
+    // Fallback to hide loader after 5 seconds
+    const timer = setTimeout(() => {
+      setIsHeroLoading(false);
+    }, 5000);
+
     return () => {
       document.head.removeChild(styleSheet);
+      clearTimeout(timer);
     };
   }, []);
 
   return (
     <>
+      {isHeroLoading && (
+        <div className="spinner-container">
+          <div className="spinner"></div>
+        </div>
+      )}
       <div className="hero-bg" style={{ position: 'relative' }}>
-        {isHeroLoading && (
-          <div className="spinner-container">
-            <div className="spinner"></div>
-          </div>
-        )}
         <div ref={heroRef}>
           <Herobanner />
         </div>
