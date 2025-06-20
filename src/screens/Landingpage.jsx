@@ -22,7 +22,7 @@ const spinnerStyles = `
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 128, 0, 0.8);
+    background: rgba(7, 97, 7, 0.34);
     display: flex;
     justify-content: center;
     align-items: center;
