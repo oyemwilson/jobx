@@ -16,7 +16,7 @@ const Herobanner = () => {
                             <h1 className="align-items-center text-start" id='landing-text'
                             >Find & Hire <br /><span className='landingtext-green'>Top 5% of expert on jobx.</span></h1>
                             <p className="text-start mt-4 h3" data-wow-delay="0.4s">We delivered blazing fast & striking work solution</p>
-                            <p className="text-start mt-4 h5">Discover and secure the top 5% of expert professionals on JobX. We are dedicated to delivering blazing-fast, striking, and highly effective work solutions that propel your projects forward.</p>
+                            <p className="text-start mt-4 h6">Discover and secure the top 5% of expert professionals on JobX. We are dedicated to delivering blazing-fast, striking, and highly effective work solutions.</p>
                             </div>
                             {/* <div className='input-group mb-3 mt-4' data-aos="fade-up" id='search-box'>
                                 <input type="text" className="form-control" placeholder="Search for any services..." aria-label="Service search" aria-describedby="basic-addon2" />
