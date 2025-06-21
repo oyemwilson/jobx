@@ -1,8 +1,10 @@
 .how-to-section {
-    height: 60vh;
+
     background-color: #122620;
     color: white;
+    padding-bottom: 100px;
 }
+
 
 #how-to {
     padding-top: 5% !important;
@@ -47,12 +49,17 @@
 
 @media only screen and (max-width: 991px) {
     .how-to-section {
-        height: 75vh;
+        height: 100%;
     }
 }
 
 @media only screen and (max-width: 767px) {
     .how-to-section {
         height: 95vh;
+    }
+}
+@media only screen and (max-width: 467px) {
+    .how-to-section {
+        height: 100vh;
     }
 }

@@ -6,7 +6,7 @@ const HowItWorks = () => {
         <>
             <div className="how-to-section">
                 
-                <div className="container" id='how-to' data-aos="fade-up">
+                <div className="containr " id='how-to' data-aos="fade-up">
                     <h1 className='text-center mb-5 mt-5 display-2'> How It Works?</h1>
                     <div className="d-flex row mt-5 ">
                         <div className='col-lg-4 col-md-6 col-sm-12 text-center'>
