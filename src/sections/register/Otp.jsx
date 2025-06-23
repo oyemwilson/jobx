@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { API_BASE_URL } from '../../config/api';
+import { Modal } from 'bootstrap';
+
 import axios from 'axios';
+import LoginModal from '../../components/modals/LoginModal';
 
 const Otp = () => {
     const location = useLocation();
@@ -35,8 +38,11 @@ const Otp = () => {
             console.log("OTP Verification Response:", response.data.role); 
             if (response.data._id) {
                 navigate('/')
-                alert('successful')
+alert('Verification successful! You can now log in.');
+
             }
+            const loginModal = new Modal(document.getElementById('loginModal'));
+  loginModal.show();
         }
         catch (err) {
             setError("Invalid OTP. Please try again.");
@@ -59,6 +65,7 @@ const Otp = () => {
                     <button type="submit" class="btn text-light w-100 login-submit mt-3" >Submit</button>
                 </form>
             </div>
+            <LoginModal />
         </div>
     )
 }
